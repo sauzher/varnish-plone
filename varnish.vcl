@@ -3,8 +3,8 @@ import std;
 
 # configure all backends
 backend default {
-   .host = "ceglie.csi.uniba.it";
-   .port = "8080";
+   .host = BACKEND;
+   .port = BACKEND_PORT;
    .connect_timeout = 4s;
    .first_byte_timeout = 300s;
    .between_bytes_timeout  = 60s;
@@ -18,10 +18,9 @@ sub vcl_init {
 acl purge {
     "localhost";
     "127.0.0.1";
-    "plone";
     "172.0.0.0/8";
     "10.0.0.0/8";
-    "ceglie.csi.uniba.it";
+    BACKEND;
 }
 
 sub vcl_recv {
@@ -178,7 +177,13 @@ sub vcl_pass {
 }
 
 sub vcl_hash {
-    
+    hash_data(req.url);
+    if (req.http.host) {
+        hash_data(req.http.host);
+    } else {
+        hash_data(server.ip);
+    }
+    return (lookup);
 }
 
 sub vcl_purge {
