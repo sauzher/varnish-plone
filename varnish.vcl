@@ -102,18 +102,18 @@ sub vcl_recv {
         }
     }
 
-    if (
-req.url ~ "/@@search(/?)" ||
-req.url ~ "/@@updated_search(/?)" ||
-req.url ~ "/search(/?)" ||
-        req.url ~ "/livesearch_reply(/?)" ||
-        req.url ~ "(.*)(/?)b_start:int=" ||
-        req.url ~ "(.*)(/?)tipo_albopretorio=" ||
-        req.url ~ "(.*)(\?|&)sezione=" ||
-        req.url ~ "(.*)(\?|&)came_from=" ||
-        req.url ~ "(.*)(\?|&)next=" ||
-        req.url ~ "(.*)(\?|&)anno="
-           ) {
+#     if (
+# req.url ~ "/@@search(/?)" ||
+# req.url ~ "/@@updated_search(/?)" ||
+# req.url ~ "/search(/?)" ||
+#         req.url ~ "/livesearch_reply(/?)" ||
+#         req.url ~ "(.*)(/?)b_start:int=" ||
+#         req.url ~ "(.*)(/?)tipo_albopretorio=" ||
+#         req.url ~ "(.*)(\?|&)sezione=" ||
+#         req.url ~ "(.*)(\?|&)came_from=" ||
+#         req.url ~ "(.*)(\?|&)next=" ||
+#         req.url ~ "(.*)(\?|&)anno="
+#            ) {
         # Normalize the query arguments
         set req.url = std.querysort(req.url);
           # Some generic URL manipulation, useful for all templates that follow
@@ -135,9 +135,9 @@ req.url ~ "/search(/?)" ||
             set req.url = regsub(req.url, "\?$", "");
           }
 
-      }else{
-        set req.url = regsub(req.url, "\?.*", "");
-      }
+    #   }else{
+    #     set req.url = regsub(req.url, "\?.*", "");
+    #   }
 
     # Large static files should be piped, so they are delivered directly to the end-user without
     # waiting for Varnish to fully read the file first.
