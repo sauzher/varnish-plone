@@ -21,6 +21,7 @@ acl purge {
     "172.0.0.0/8";
     "10.0.0.0/8";
     BACKEND;
+    PURGE_SERVERS
 }
 
 sub vcl_recv {

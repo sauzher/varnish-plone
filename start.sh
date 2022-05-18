@@ -4,6 +4,7 @@ set -e
 
 sed -i "s/BACKEND;/\"${BACKEND}\";/g" $VCL_CONFIG
 sed -i "s/BACKEND_PORT;/\"${BACKEND_PORT}\";/g" $VCL_CONFIG
+sed -i "s/PURGE_SERVERS/${PURGE_SERVERS}/g" $VCL_CONFIG
 
 dd if=/dev/random of=/etc/varnish/varnish_secret count=1
 chmod 600 /etc/varnish/varnish_secret
