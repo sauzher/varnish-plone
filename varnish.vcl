@@ -144,11 +144,11 @@ req.url ~ "/search(/?)" ||
 
     # TODO: make this configureable.
 
-    if (req.url ~ "^[^?]*\.(mp3,mp4|rar|tar|tgz|gz|wav|zip|pdf)(\?.*)?$") {
+    if (req.url ~ "^[^?]*\.(mp3,mp4|rar|tar|tgz|gz|wav|zip|pdf|avi)(\?.*)?$") {
         return(pipe);
     }
      if (req.http.Accept-Encoding) {
-        if (req.url ~ "\.(jpg|jpeg|png|gif|gz|tgz|bz2|tbz|mp3|mp4|ogg|pdf)$") {
+        if (req.url ~ "\.(jpg|jpeg|png|gif|gz|tgz|bz2|tbz|mp3|mp4|ogg|pdf|avi)$") {
           unset req.http.Accept-Encoding;
         } elsif (req.http.Accept-Encoding ~ "gzip") {
           set req.http.Accept-Encoding = "gzip";
